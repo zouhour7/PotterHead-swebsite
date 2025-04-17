@@ -1,0 +1,235 @@
+/* App.css */
+/* Dark mode styles */
+.background.dark {
+  filter: brightness(0.15);
+}
+
+.knox-effect {
+  filter: brightness(0.15) grayscale(0.8);
+  transition: filter 1s ease;
+}
+
+.flashlight-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 998;
+  background: radial-gradient(
+    circle 200px at var(--cursorX) var(--cursorY),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(200, 200, 100, 0.4) 60%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+.spotlight-title {
+  position: relative;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-mask-image: radial-gradient(
+    circle 200px at var(--cursorX) var(--cursorY),
+    white 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 200px at var(--cursorX) var(--cursorY),
+    white 0%,
+    transparent 100%
+  );
+}
+
+.spotlight-title:hover {
+  opacity: 1;
+}
+
+.patronus-starting-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.patronus-starting-effect .light-ball {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 1) 100%);
+  border-radius: 50%;
+  animation: expandLight 2s ease-out forwards;
+  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
+}
+
+.patronus-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.patronus-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(200, 220, 255, 0.7) 30%,
+    rgba(173, 216, 230, 0.5) 70%,
+    rgba(173, 216, 230, 0.2) 100%
+  );
+  animation: pulseLight 3s infinite alternate;
+}
+
+/* Sorting instructions */
+.sorting-instructions {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 600px;
+  backdrop-filter: blur(5px);
+  border: 2px solid goldenrod;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.sorting-instructions p {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Harry Potter', serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sorting-button {
+  background: linear-gradient(to bottom, #2a623d, #1a472e);
+  color: gold;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  font-family: 'Harry Potter', serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sorting-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  background: linear-gradient(to bottom, #1a472e, #2a623d);
+}
+
+@keyframes expandLight {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(20);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseLight {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.background {
+  transition: filter 0.5s ease, background 0.3s ease, opacity 0.5s ease;
+}
+
+.title {
+  transition: opacity 0.5s ease;
+}
+
+.title h1 {
+  font-family: 'Harry Potter', serif;
+  font-size: 6rem;
+  margin: 0;
+  text-align: center;
+  text-shadow: 
+    -2px -2px 0 white, 
+    2px -2px 0 white, 
+    -2px 2px 0 white, 
+    2px 2px 0 white,
+    -4px -4px 4px rgba(255, 255, 255, 0.8),
+    4px -4px 4px rgba(255, 255, 255, 0.8),
+    -4px 4px 4px rgba(255, 255, 255, 0.8),
+    4px 4px 4px rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+body {
+  cursor: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: url('./assets/wandd.png'), auto;
+}
+
+.background {
+  background-image: url('./assets/hog.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@font-face {
+  font-family: 'Harry Potter';
+  src: url('./assets/harry_p/HARRYP__.TTF') format('truetype');
+}
+
+.visible-title {
+  position: relative;
+  color: black;
+  text-shadow: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.hidden-title {
+  opacity: 0;
+  pointer-events: none;
+}

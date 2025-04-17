@@ -1,0 +1,207 @@
+@font-face {
+    font-family: 'Harry Potter';
+    src: url('./assets/harry_p/HARRYP__.TTF') format('truetype');
+}
+
+/* Add these styles to your intro.css file */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .intro-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    background-image: url('./assets/a.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.title-with-owl {
+    position: relative;
+    display: inline-block;
+}
+
+.intro-title {
+    font-family: 'Harry Potter', serif;
+    font-size: 4rem;
+    color: #8A92A6;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #888,
+        0 0 30px #888,
+        0 0 40px #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+}
+
+.hedwig-wrapper {
+    position: absolute;
+    left: -150px; /* Moved further left to accommodate larger size */
+    top: -25px; /* Adjusted positioning to align with title */
+    width: 250px; /* Increased size */
+    height: 250px; /* Increased size */
+}
+
+.hedwig-container {
+    position: relative;
+    background: transparent;
+}
+
+.intro-instructions {
+    font-family: 'Harrington', cursive;
+    font-size: 1.03rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+}
+
+.intro-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: rgb(81, 42, 42);
+    background-color: #929293;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.intro-button:hover {
+    background-color: #000000;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+}
+/* Add these styles to your existing intro.css file */
+
+.content-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 30px;
+    align-items: center;
+}
+
+.letter-container {
+    width: 250px;
+    height: 400px;
+    position: relative;
+    margin-top: 20px;
+        margin-left: 3rem; /* Add margin to push it rightward */
+        /* You could also use position: absolute if needed */
+ 
+}
+
+.letter-wrapper {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.letter-wrapper:active {
+    cursor: grabbing;
+}
+
+
+
+/* Add or replace these styles in your existing intro.css file */
+
+.content-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.letter-container {
+    width: 180px; /* Smaller letter container */
+    height: 200px;
+    position: relative;
+    margin-top: 20px;
+    order: 2; /* Places letter on the right */
+}
+
+.letter-wrapper {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.letter-wrapper:active {
+    cursor: grabbing;
+}
+
+/* Adjust the intro-container for centered positioning */
+.intro-container {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #b8b8b8;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
+    width: 60%;
+    max-width: 600px;
+    margin: 0 auto; /* Ensures horizontal centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 70vh;
+    z-index: 1; /* Ensures it's above other elements */
+}
+
+    .content-layout {
+        display: flex;
+        width: 100%;
+        max-width: 1200px; /* Increased for more spacing */
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center; /* Centers the content */
+        position: relative; /* Needed for absolute positioning */
+        padding: 0 20px;
+    }
+    
+    .letter-container {
+        width: 180px;
+        height: 200px;
+        position: absolute; /* Position absolutely */
+        right: 10%; /* Move to right side */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        z-index: 2; /* Put above the intro container if they overlap */
+    }
+    
+    .intro-container {
+        max-width: 600px; /* Adjust based on your needs */
+        margin: 0 auto; /* Center the content */
+      }
