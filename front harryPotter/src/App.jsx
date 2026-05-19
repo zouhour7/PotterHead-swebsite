@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import patronusSound from '../sounds/ep.mp3';
 
 function App() {
   const [lumosActive, setLumosActive] = useState(false);
@@ -30,7 +31,9 @@ function App() {
         
         if (patronusAudioRef.current) {
           patronusAudioRef.current.currentTime = 0;
-          patronusAudioRef.current.play();
+          patronusAudioRef.current.play().catch((error) => {
+            console.warn('Patronus audio playback failed:', error);
+          });
         }
         
         setTimeout(() => {
@@ -65,7 +68,7 @@ function App() {
   
   return (
     <>
-      <audio ref={patronusAudioRef} src="./sounds/ep.mp3" preload="auto"></audio>
+      <audio ref={patronusAudioRef} src={patronusSound} preload="auto"></audio>
       
       {patronusStarting && (
         <div className="patronus-starting-effect">
@@ -102,11 +105,13 @@ function App() {
         {patronusActive && (
           <div className="sorting-instructions">
             <p>Eager to uncover which Hogwarts house you truly belong to?</p>
+            <Link to="/sorting">
             <button 
               className="sorting-button"
             >
               Start Sorting
             </button>
+            </Link>
             <p> Wish to sneak a peek at the enchanted Marauder’s Map:</p>
             <Link to="/map">
             <button 

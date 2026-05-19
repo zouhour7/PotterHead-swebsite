@@ -1,37 +1,46 @@
-import { useState, useEffect } from 'react';
-import './Map.css';
-import './animations.css';
+// Map.jsx
+import React, { useEffect, useState } from 'react';
+import './map.css';
 
 const Map = () => {
   const [mapActive, setMapActive] = useState(false);
 
   useEffect(() => {
-    const recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.continuous = true;
     recognition.interimResults = true;
-    
+
     recognition.onresult = (event) => {
       const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
-      
-      if (transcript.includes('i solemnly swear that i\'m up to no good')) {
+      console.log("Transcript:", transcript);
+      if (transcript.includes("i solemnly swear that i'm up to no good")) {
         setMapActive(true);
       }
-      if (transcript.includes('mischief managed')) {
+      if (transcript.includes("mischief managed")) {
         setMapActive(false);
       }
     };
 
     recognition.start();
 
-    return () => {
-      recognition.abort();
-    };
+    return () => recognition.abort();
   }, []);
 
-  const handleManualToggle = () => setMapActive(!mapActive);
+  const toggleMap = () => {
+    setMapActive((prev) => !prev);
+  };
 
   return (
+    <div className="map-wrapper">
     <div className="main-content">
+      <div className="instructions">
+        <p>Say: "I solemnly swear that I'm up to no good" to open the map.</p>
+        <p>Say: "Mischief Managed" to close it.</p>
+        <button className="toggle-map" onClick={toggleMap}>
+        click here if you are a Muggle
+        </button>
+      </div>
+
       <div className={`map-base ${mapActive ? 'active' : ''}`}>
         <div className="footsteps footsteps-1">
           <div className="footstep left"></div>
@@ -40,7 +49,6 @@ const Map = () => {
             <p>Severus Snape</p>
           </div>
         </div>
-        
         <div className="footsteps footsteps-2">
           <div className="footstep left"></div>
           <div className="footstep right"></div>
@@ -72,6 +80,7 @@ const Map = () => {
         </div>
         <div className="map-side side-4">
           <div className="front" style={{ "--image": "url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/10.png')" }}></div>
+          <div className="back"></div>
         </div>
         <div className="map-side side-5">
           <div className="front" style={{ "--image": "url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/6.png')" }}></div>
@@ -82,12 +91,7 @@ const Map = () => {
           <div className="back"></div>
         </div>
       </div>
-
-      <div className="instructions">
-        <p> Say "I solemnly swear that I'm up to no good" to open</p>
-        <p>Say "Mischief Managed!" to close</p>
-        <button className="toggle-map" onClick={handleManualToggle}>Open/Close Map</button>
-      </div>
+    </div>
     </div>
   );
 };
