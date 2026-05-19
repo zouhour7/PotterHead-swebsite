@@ -133,7 +133,29 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+.voice-fallback-button {
+  background: linear-gradient(to bottom, #2a623d, #1a472e);
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: gold;
+  cursor: pointer;
+  font-family: 'Harry Potter', serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-top: 2rem;
+  padding: 12px 28px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
 .sorting-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  background: linear-gradient(to bottom, #1a472e, #2a623d);
+}
+
+.voice-fallback-button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
   background: linear-gradient(to bottom, #1a472e, #2a623d);
@@ -232,4 +254,37 @@ body {
 .hidden-title {
   opacity: 0;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .title {
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .title h1 {
+    font-size: clamp(3rem, 16vw, 5rem);
+    overflow-wrap: anywhere;
+  }
+
+  .sorting-instructions {
+    box-sizing: border-box;
+    margin: 1rem auto;
+    max-width: none;
+    padding: 1.25rem;
+    width: min(92vw, 520px);
+  }
+
+  .sorting-instructions p {
+    font-size: 1.1rem;
+  }
+
+  .sorting-button,
+  .voice-fallback-button {
+    font-size: 1.05rem;
+    max-width: 100%;
+    padding: 11px 20px;
+    white-space: normal;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
 import patronusSound from '../sounds/ep.mp3';
@@ -10,10 +10,40 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [contentVisible, setContentVisible] = useState(true);
+  const [speechFallbackVisible, setSpeechFallbackVisible] = useState(false);
   const patronusAudioRef = useRef(null);
 
+  const revealPatronus = useCallback(() => {
+    setLumosActive(false);
+    setPatronusStarting(true);
+    setContentVisible(false);
+
+    if (patronusAudioRef.current) {
+      patronusAudioRef.current.currentTime = 0;
+      patronusAudioRef.current.play().catch((error) => {
+        console.warn('Patronus audio playback failed:', error);
+      });
+    }
+
+    setTimeout(() => {
+      setPatronusActive(true);
+      setDarkMode(false);
+      setPatronusStarting(false);
+      setContentVisible(true);
+      setSpeechFallbackVisible(false);
+    }, 2000);
+  }, []);
+
   useEffect(() => {
-    const recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
+    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setSpeechFallbackVisible(true);
+      console.warn('Speech recognition is not supported in this browser.');
+      return undefined;
+    }
+
+    const recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.onresult = (event) => {
@@ -25,23 +55,7 @@ function App() {
         setPatronusStarting(false);
       }
       if (transcript.includes('expecto patronum')) {
-        setLumosActive(false);
-        setPatronusStarting(true);
-        setContentVisible(false);
-        
-        if (patronusAudioRef.current) {
-          patronusAudioRef.current.currentTime = 0;
-          patronusAudioRef.current.play().catch((error) => {
-            console.warn('Patronus audio playback failed:', error);
-          });
-        }
-        
-        setTimeout(() => {
-          setPatronusActive(true);
-          setDarkMode(false);
-          setPatronusStarting(false);
-          setContentVisible(true);
-        }, 2000);
+        revealPatronus();
       }
       if (transcript.includes('knox')) {
         setDarkMode(true);
@@ -50,8 +64,20 @@ function App() {
         setPatronusStarting(false);
       }
     };
+
+    recognition.onerror = (event) => {
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        setSpeechFallbackVisible(true);
+      }
+      console.warn('Speech recognition error:', event.error);
+    };
     
-    recognition.start();
+    try {
+      recognition.start();
+    } catch (error) {
+      setSpeechFallbackVisible(true);
+      console.warn('Speech recognition failed to start:', error);
+    }
     
     const handleMouseMove = (e) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
@@ -63,7 +89,7 @@ function App() {
       recognition.abort();
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [revealPatronus]);
 
   
   return (
@@ -121,6 +147,12 @@ function App() {
             </button>
             </Link>
           </div>
+        )}
+
+        {speechFallbackVisible && !patronusActive && !patronusStarting && (
+          <button className="voice-fallback-button" type="button" onClick={revealPatronus}>
+            Cast Expecto Patronum
+          </button>
         )}
       </div>
       

@@ -1,11 +1,36 @@
 .map-wrapper {
     background: #302f2f;
+    min-height: 100vh;
+    overflow-x: hidden;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: auto;
   }
+
+@media (max-width: 640px) {
+	.map-wrapper {
+		min-height: 100svh;
+		overflow-y: auto;
+	}
+
+	.main-content {
+		box-sizing: border-box;
+		padding: 0.75rem;
+		width: 100%;
+	}
+
+	.instructions {
+		font-size: 0.95rem;
+	}
+
+	.map-base {
+		margin-bottom: -135px;
+		transform: scale(0.72);
+		transform-origin: top center;
+	}
+}
 
 aside.context {
 	text-align: center;

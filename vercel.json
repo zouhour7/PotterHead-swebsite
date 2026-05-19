@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd \"front harryPotter\" && npm install && npm run build",
+  "outputDirectory": "front harryPotter/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

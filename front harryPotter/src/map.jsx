@@ -1,12 +1,20 @@
+/* eslint-disable react/no-unescaped-entities */
 // Map.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './map.css';
 
 const Map = () => {
   const [mapActive, setMapActive] = useState(false);
 
   useEffect(() => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      console.warn('Speech recognition is not supported in this browser.');
+      return undefined;
+    }
+
+    const recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
 
@@ -21,7 +29,15 @@ const Map = () => {
       }
     };
 
-    recognition.start();
+    recognition.onerror = (event) => {
+      console.warn('Map speech recognition error:', event.error);
+    };
+
+    try {
+      recognition.start();
+    } catch (error) {
+      console.warn('Map speech recognition failed to start:', error);
+    }
 
     return () => recognition.abort();
   }, []);

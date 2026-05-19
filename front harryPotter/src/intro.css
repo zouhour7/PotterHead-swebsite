@@ -205,3 +205,53 @@ canvas {
         max-width: 600px; /* Adjust based on your needs */
         margin: 0 auto; /* Center the content */
       }
+
+@media (max-width: 768px) {
+    .intro-page {
+        box-sizing: border-box;
+        min-height: 100svh;
+        overflow-y: auto;
+        padding: 16px;
+        position: relative;
+    }
+
+    .intro-title {
+        font-size: clamp(2.6rem, 16vw, 4rem);
+        overflow-wrap: anywhere;
+    }
+
+    .hedwig-wrapper {
+        display: none;
+    }
+
+    .content-layout {
+        box-sizing: border-box;
+        flex-direction: column;
+        gap: 14px;
+        padding: 0;
+        width: 100%;
+    }
+
+    .intro-container {
+        box-sizing: border-box;
+        min-height: auto;
+        padding: 16px;
+        width: 100%;
+    }
+
+    .intro-instructions {
+        font-size: 0.95rem;
+        margin-bottom: 11px;
+    }
+
+    .letter-container {
+        height: 150px;
+        margin: 0 auto;
+        order: 2;
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 150px;
+    }
+}
